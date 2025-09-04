@@ -1,0 +1,19 @@
+name: Compile
+
+# Run job on pushes to main branch or pull requests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04 # Run compilation jobs on Ubuntu 24.04 LTS (target OS)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Checkout the repository
+
+      - name: Compile code
+        run: make
