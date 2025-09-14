@@ -1,19 +1,20 @@
+
 CC = gcc
 CFLAGS = -Wall -g
 
-# Find all .c files recursively
-SRC_FILES := $(shell find . -name "*.c")
-OBJ_FILES := $(patsubst %.c,%.o,$(SRC_FILES))
+# Recursively find all .c files in src/
+SRC_FILES := $(shell find src -type f -name "*.c")
+OBJ_FILES := $(SRC_FILES:.c=.o)
 
-TARGET = proyecto
+TARGET = metodos
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $@
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o "$@"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c "$<" -o "$@"
 
 clean:
-	rm -f $(OBJ_FILES) $(TARGET)
+	rm -f $(OBJ_FILES) "$@"
