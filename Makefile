@@ -2,8 +2,8 @@ CC = gcc
 CFLAGS = -Wall -g
 
 # Find all source files recursively
-SRC_FILES := $(wildcard src/**/*.c)
-OBJ_FILES := $(patsubst %.c,%.o,$(SRC_FILES))
+SRC_FILES := $(shell find src -type f -name '*.c' -print0 | xargs -0 echo)
+OBJ_FILES := $(SRC_FILES:.c=.o)
 
 TARGET = proyecto
 
