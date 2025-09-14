@@ -10,10 +10,13 @@ TARGET = proyecto
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o "$@"
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $@
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c "$<" -o "$@"
+$(OBJ_FILES):
+	for src in $(SOURCES); do \
+	  obj="$$src"; obj=$${obj%.c}.o; \
+	  $(CC) $(CFLAGS) -c "$$src" -o "$$obj"; \
+	done
 
 clean:
 	rm -f $(OBJ_FILES) $(TARGET)
