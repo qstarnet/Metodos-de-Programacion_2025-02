@@ -3,7 +3,7 @@ CFLAGS = -Wall -g
 
 # Find all .c files safely, handling spaces
 SOURCES := $(shell find src/ -name '*.c' -print0 | xargs -0 echo)
-OBJ_FILES := $(patsubst %.c,%.o,$(SRC_FILES))
+OBJ_FILES := $(patsubst %.c,%.o,$(SOURCES))
 
 TARGET = proyecto
 
