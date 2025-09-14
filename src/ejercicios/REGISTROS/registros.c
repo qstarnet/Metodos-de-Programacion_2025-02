@@ -166,7 +166,7 @@ int main (int argc, char* argv[]){
 	char * nombreArchivo;
 
 	if (argc != 2) {
-		nombreArchivo = "C:\\Users\\rosil\\Git\\qstarnet\\Metodos-de-Programacion_2025-02\\src\\ejercicios\\REGISTROS\\registros_1.in";
+		nombreArchivo = "registros.in";
 	} else {
 		nombreArchivo = argv[1];
 	}
