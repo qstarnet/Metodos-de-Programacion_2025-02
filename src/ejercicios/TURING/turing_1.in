@@ -1,0 +1,24 @@
+; This program multiplies a binary number by 2
+; Input: a string of 0's and 1's, eg '1001001'
+
+
+; Machine starts in state 0.
+
+; State 0 (move to end of tape)
+0 0 0 r 0
+0 1 1 r 0
+0 _ _ l 1
+
+; State 1 (add a trailing zero)
+1 0 0 l 2
+1 1 0 l 3
+
+; State 2 (previous was zero)
+2 0 0 l 2
+2 1 0 l 3
+2 _ 0 l halt
+
+; State 3 (previous was one)
+3 0 1 l 2
+3 1 1 l 3
+3 _ 1 l halt
