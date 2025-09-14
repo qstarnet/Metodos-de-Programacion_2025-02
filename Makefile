@@ -12,7 +12,7 @@ $(info OBJ_FILES=$(OBJ_FILES))
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o "$@"
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o "$@" -lm
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c "$<" -o "$@"
