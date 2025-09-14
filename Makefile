@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-# Use find and -print0, then convert nulls to spaces for SOURCES
-SRC_FILES := $(shell find src/ -name '*.c' -print0 | tr '\0' ' ')
-OBJ_FILES := $(SRC_FILES:.c=.o)
+# Find all source files recursively
+SRC_FILES := $(wildcard src/**/*.c)
+OBJ_FILES := $(patsubst %.c,%.o,$(SRC_FILES))
 
 TARGET = proyecto
 
