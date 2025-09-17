@@ -1,0 +1,40 @@
+; This program multiplies a binary number by 2^N and then adds 1
+; Input: a string of ones and zeroes that represent the number you want to multiply
+;        and add one, followed by a ^ sign and two's exponent in binary
+; eg '10011001^11' is 153 * 2^3 + 1
+
+
+; Machine starts in state 0.
+
+; State 0 (go to rightmost symbol)
+0 0 0 r 0
+0 1 1 r 0
+0 ^ ^ r 0
+0 _ _ l 1
+
+; State 1 (decrease exponent by one)
+1 0 _ l E
+1 1 0 l E
+1 ^ _ l ADD
+
+; State E (move to the left of exponent symbol)
+E 0 0 l E
+E 1 1 l E
+E ^ ^ l F
+
+; State F (read factor's rightmost symbol and set it to zero)
+F 0 0 l F0
+F 1 0 l F1
+
+; State F0 (last was zero -> move factor left)
+F0 0 0 l F0
+F0 1 0 l F1
+F0 _ 0 r 0
+
+; State F1 (last was one -> move factor left)
+F1 0 1 l F0
+F1 1 1 l F1
+F1 _ 1 r 0
+
+; State ADD
+ADD 0 1 r halt

@@ -1,0 +1,38 @@
+; This program checks if the input string is a binary palindrome.
+; Input: a string of 0's and 1's, eg '1001001'
+
+
+; Machine starts in state 0.
+
+; State 0 (read leftmost symbol)
+0 0 _ r 1
+0 1 _ r 3
+0 _ Y r halt-accept
+
+; State 1 (zero, move to end)
+1 0 0 r 1
+1 1 1 r 1
+1 _ _ l 2
+
+; State 2 (zero, read rightmost symbol)
+2 0 _ l L
+2 1 _ l N
+
+; State 3 (one, move to end)
+3 0 0 r 3
+3 1 1 r 3
+3 _ _ l 4
+
+; State 4 (one, read rightmost symbol)
+4 0 _ l N
+4 1 _ l L
+
+; State LEFT (go to leftmost symbol)
+L 0 0 l L
+L 1 1 l L
+L _ _ r 0
+
+; State NOT (erase tape, not a palindrome)
+N 0 _ l N
+N 1 _ l N
+N _ N r halt-deny
