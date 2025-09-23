@@ -1,0 +1,45 @@
+; This example program outputs the input base-5 number string's highest digit
+; Input: A string representing a base-5 number eg '012031204'
+
+
+; Machine starts in state 0.
+
+; State 0 - Highest is zero, read current symbol
+0 0 _ r 0
+0 1 _ r 1
+0 2 _ r 2
+0 3 _ r 3
+0 4 _ r 4
+0 _ 0 r halt-0
+
+; State 1 - Highest is one, read current symbol
+1 0 _ r 1
+1 1 _ r 1
+1 2 _ r 2
+1 3 _ r 3
+1 4 _ r 4
+1 _ 1 r halt-1
+
+; State 2 - Highest is two, read current symbol
+2 0 _ r 2
+2 1 _ r 2
+2 2 _ r 2
+2 3 _ r 3
+2 4 _ r 4
+2 _ 2 r halt-2
+
+; State 3 - Highest is three, read current symbol
+3 0 _ r 3
+3 1 _ r 3
+3 2 _ r 3
+3 3 _ r 3
+3 4 _ r 4
+3 _ 3 r halt-3
+
+; State 4 - Highest is four, clear everything else
+4 0 _ r 4
+4 1 _ r 4
+4 2 _ r 4
+4 3 _ r 4
+4 4 _ r 4
+4 _ 4 r halt-4

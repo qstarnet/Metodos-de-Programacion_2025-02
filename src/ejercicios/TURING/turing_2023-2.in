@@ -1,0 +1,53 @@
+; This example program verifies the parity digit of a message
+; This means if a message of 0's and 1's an even number of 1's, the last digit should be zero
+; else, it should be one 
+; Input: a message representing a binary number with a parity bit, eg "10010110"
+
+
+; Machine starts in state 0.
+
+; State 0 - Even, keep reading to the right
+0 0 0 r 0
+0 1 1 r 1
+0 _ _ l EC
+
+; State 1 - Odd, keep reading to the right
+1 0 0 r 1
+1 1 1 r 0
+1 _ _ l OC
+
+; State EVEN CHECK, if last is zero, check for even, else check for odd
+EC 0 0 r E
+EC 1 1 r O
+
+; State ODD CHECK, if last is zero, check for odd, else check for even
+OC 0 0 r O
+OC 1 1 r E
+
+; State EVEN - Even, last digit should be zero
+E 0 _ l K
+E 1 _ l X
+E _ _ l E
+
+; State ODD - Odd, last digit should be one
+O 0 _ l X
+O 1 _ l K
+O _ _ l O
+
+; State OK - All OK, clear everything and write OK
+K 0 _ l K
+K 1 _ l K
+K _ O r KO
+
+KO _ K r halt-ok
+
+
+; State ERROR - Error, clear everything and write ERROR
+X 0 _ l X
+X 1 _ l X
+X _ E r XE
+
+XE _ R r XER
+XER _ R r XERR
+XERR _ O r XERRO
+XERRO _ R r halt-error

@@ -1,0 +1,39 @@
+; This example program checks if the input string has equal number of zeroes
+; Input: two strings of 0's separated by a #, eg '00000#00000'
+
+
+; Machine starts in state 0.
+
+; State 0 - Read leftmost symbol
+0 0 _ r 1
+0 # # r 4
+0 _ _ r Y
+
+; State 1 - Zero, move to end
+1 0 0 r 1
+1 # # r 1
+1 _ _ l 2
+
+; State 2 - Zero, check rightmost symbol
+2 0 _ l 3
+2 # # r N
+2 _ _ l N
+
+; State 3 - Zero, move to start
+3 0 0 l 3
+3 # # l 3
+3 _ _ r 0
+
+; State 4 - Separator, if nothing left, equal, else not equal
+4 0 _ r N
+4 _ _ r Y
+
+; State YES - Write I at end of tape
+Y 0 0 r Y
+Y # # r Y
+Y _ I r halt-accept
+
+; State NO - Write N at end of tape
+N 0 0 r N
+N # # r N
+N _ N r halt-deny
