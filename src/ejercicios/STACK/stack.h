@@ -13,6 +13,7 @@ void MOD (int *primero, char *** stack);
 void RAI (int *primero, char *** stack);
 void EXP (int *primero, char *** stack);
 void POT (int *primero, char *** stack);
+void FAC (int *primero, char *** stack);
 
 void PUSH(int * primero, char *** stack, char * dato){	
 
@@ -150,6 +151,20 @@ void POT (int *primero, char *** stack){
 	char * suma = (char *) malloc(sizeof(char)*20); 
 	//itoa ( pow(num1,  num2) , suma , 10 ) ;
         sprintf(suma,"%f",pow(num1,num2));
+
+	PUSH(primero,stack,suma);
+}
+
+void FAC (int *primero, char *** stack){
+
+	char * n1 = POP(primero, stack);
+
+	int num1 = atoi(n1);
+
+
+	char * suma = (char *) malloc(sizeof(char)*20);
+	// itoa ( tgamma(num1 + 1) , suma , 10 ) ;
+		sprintf(suma,"%f",tgamma(num1 + 1));
 
 	PUSH(primero,stack,suma);
 }
