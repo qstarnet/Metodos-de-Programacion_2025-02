@@ -100,9 +100,9 @@ void ejecutar(char ** programa, char ** stack, int instrucciones,int push){
 	printf("\n************************************\n");
 	printf("******** EJECUCION PROGRAMA ********\n");
 	printf("************************************\n\n");
-	
+
 	int primero = 0;
-	
+
 	for(i = 0; i<instrucciones;i++){
 		
 		printf("\n_______________________________________________________________\n");
@@ -149,6 +149,10 @@ void ejecutar(char ** programa, char ** stack, int instrucciones,int push){
 		else if(strcmp(programa[i],"RAI") == 0){
 			printf("\nInstruccion: %s \n",programa[i]);	
 			RAI(&primero, &stack);
+		}
+		else if(strcmp(programa[i],"FAC") == 0){
+			printf("\nInstruccion: %s \n",programa[i]);	
+			FAC(&primero, &stack);
 		}
 		else{
 			printf("\nInstruccion: %s (No se reconoce)\n",programa[i]);
